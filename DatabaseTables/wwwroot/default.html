@@ -6,7 +6,7 @@
 
     <!-- CSS -->
     <!-- JavaScript -->
-    <script src="/js/submitAction.js"></script>
+    <script src="/js/logIn.js"></script>
 </head>
 <body>
     <header>
@@ -18,15 +18,16 @@
         <a href="https://localhost:5001/auth.html">To register</a>
     </div>
 
+    <!-- Username and password forms. -->
     <div id="login">
         <form action="">
             Username:<br>
-            <input type="text" name="username" />
+            <input id="username_id" name="username" type="text" />
             <br>
             Password:<br />
-            <input type="text" name="password" />
+            <input id="password_id" name="password" type="text" />
             <br />
-            <input type="submit" value="Submit">
+            <input id="clickMe" type="button" value="clickme" onclick="testFunction();" />
         </form>
     </div>
 </body>

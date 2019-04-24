@@ -8,6 +8,8 @@ using DatabaseTables.Models;
 
 namespace DatabaseTables.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CommandsController : ControllerBase
     {
         private readonly CommandContext _context;

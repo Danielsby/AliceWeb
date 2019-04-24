@@ -10,10 +10,10 @@ namespace DatabaseTables.Models
     {
         public CommandContext(DbContextOptions<CommandContext> options) : base(options)
         {
-
         }
 
         public DbSet<Command> CommandItems { get; set; }
+
         public DbSet<User> Users { get; set;  }
     }
 }

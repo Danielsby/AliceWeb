@@ -27,6 +27,8 @@ namespace DatabaseTables
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<CommandContext>
             (opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:ConnectionString"]));
 
@@ -36,6 +38,7 @@ namespace DatabaseTables
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -44,6 +47,12 @@ namespace DatabaseTables
             {
                 app.UseHsts();
             }
+
+
+            // Allow Cors policy. 
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:5000").AllowAnyMethod()
+            );
 
             app.UseDefaultFiles(); // Serve homepage.
             app.UseStaticFiles(); // Serve static files from wwwroot. 
