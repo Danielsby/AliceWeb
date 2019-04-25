@@ -10,7 +10,7 @@ using DatabaseTables.Services;
 using DatabaseTables.Models;
 using Microsoft.AspNetCore.Authorization;
 
-// More files here
+// TODO: Add more comments.
 namespace DatabaseTables.Controllers
 {
     public class UsersController : ControllerBase
@@ -34,5 +34,32 @@ namespace DatabaseTables.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _userService.GetAll();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user = _userService.GetById(id);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow admins to access other user recoreds
+            var currentUserId = int.Parse(User.Identity.Name);
+            if (id != currentUserId && !User.IsInRole(Role.Admin))
+            {
+                return Forbid();
+            }
+
+            return Ok(user);
+        }
     }
 }
