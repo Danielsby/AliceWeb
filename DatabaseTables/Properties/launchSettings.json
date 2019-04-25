@@ -1,12 +1,15 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:53256",
       "sslPort": 44344
     }
+  },
+  "AppSettings": {
+    "Secret": "Cats are everywhere."
   },
   "profiles": {
     "IIS Express": {
