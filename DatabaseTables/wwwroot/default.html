@@ -11,30 +11,53 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Alice DCS TESTer!</h1>
+        <h1></h1>
     </header>
 
-    <div id="AliceLogin">
-        <img src="./images/AliceLogo.png" alt="Alice Logo">
-   
-    </div>
- 
 
-    <div id="links">
-        <a href="https://localhost:5001/manual.html">To read the manual</a>
-        <a href="https://localhost:5001/auth.html">To register</a>
+    <div class="section group">
+        <div class="col span_1_of_2">
+
+
+            <div id="AliceLogin">
+                <!--linker til forsiden her for enkelhetens skyld - midlertidig -->
+                <a href="./frontpage.html">
+                    <img src="./images/AliceLogo.png" alt="Alice Logo" height=450px width=auto>
+                </a>
+            </div>
+
+
+
+        </div>
+        <div class="col span_1_of_2">
+
+            <h1>LCH - ALICE</h1>
+
+            <h2>Detector Control System</h2>
+
+            <div id="login">
+                <form action="">
+                    Username:<br>
+                    <input type="text" name="username" />
+                    <br>
+                    Password:<br />
+                    <input type="text" name="password" />
+                    <br />
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+
+
+         
+        </div>
     </div>
 
-    <div id="login">
-        <form action="">
-            Username:<br>
-            <input type="text" name="username" />
-            <br>
-            Password:<br />
-            <input type="text" name="password" />
-            <br />
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+
+
+
+
+
+
+
 </body>
 </html>
