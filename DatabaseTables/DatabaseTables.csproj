@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\images\4_Color_Logo_CB.png" />
+    <Content Remove="wwwroot\images\AliceLogo.png" />
+  </ItemGroup>
 </Project>
