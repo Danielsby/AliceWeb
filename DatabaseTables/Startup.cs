@@ -21,6 +21,9 @@ using DatabaseTables.Services;
 
 namespace DatabaseTables
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Startup
     {
         /// <summary>
@@ -98,7 +101,7 @@ namespace DatabaseTables
                  };
             });
 
-            services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +121,6 @@ namespace DatabaseTables
             {
                 app.UseHsts();
             }
-
 
             // Allow Cors policy. 
             app.UseCors(
