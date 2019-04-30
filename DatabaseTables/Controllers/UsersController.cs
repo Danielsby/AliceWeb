@@ -10,7 +10,12 @@ using DatabaseTables.Services;
 using DatabaseTables.Models;
 using Microsoft.AspNetCore.Authorization;
 
-// TODO: Add more comments.
+/// <summary>
+/// Defines and handles all routes. 
+/// Within each route the controller calls the user service to perform the action required.
+/// On successful authentication the authenticate method generates a JWT using JwtSecurityTokenHandler class. 
+/// It generates a token, digital signed by using the secret key in appsettings.json. 
+/// </summary>
 namespace DatabaseTables.Controllers
 {
     public class UsersController : ControllerBase

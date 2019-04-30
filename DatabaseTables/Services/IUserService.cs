@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 
+// Business logic, validation and database access code for users. 
 namespace DatabaseTables.Services
 {
     public interface IUserService
@@ -24,6 +25,7 @@ namespace DatabaseTables.Services
     {
         // Users hardcoded for simplicity, store in a db with hashed password in production applicatiaons. 
         // TODO: Put this inside the database. 
+        // Get this from the database instead.
         private List<User> _user = new List<User>
         {
             new User { Id = 1, FirstName = "admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin},
