@@ -17,6 +17,7 @@ using AutoMapper;
 using DatabaseTables.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using DatabaseTables.Services;
 
 namespace DatabaseTables
 {
@@ -91,15 +92,13 @@ namespace DatabaseTables
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKeyResolver = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false
                  };
-            
             });
 
-
-
+            services.AddScoped<IUserService, UserServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
