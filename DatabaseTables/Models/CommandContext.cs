@@ -11,12 +11,22 @@ namespace DatabaseTables.Models
     /// </summary>
     public class CommandContext : DbContext
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
         public CommandContext(DbContextOptions<CommandContext> options) : base(options)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<Command> CommandItems { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<User> Users { get; set;  }
     }
 }

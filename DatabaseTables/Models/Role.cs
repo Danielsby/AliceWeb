@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 /// </summary>
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Role
     {
         public const string Admin = "Admin";

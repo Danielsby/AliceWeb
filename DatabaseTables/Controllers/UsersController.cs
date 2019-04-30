@@ -22,6 +22,10 @@ namespace DatabaseTables.Controllers
     {
         private IUserService _userService;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userService"></param>
         public UsersController(IUserService userService)
         {
             _userService = userService;

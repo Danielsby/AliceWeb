@@ -14,6 +14,9 @@ using System.Security.Claims;
 // Business logic, validation and database access code for users. 
 namespace DatabaseTables.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IUserService
     {
         User Authenticate(string username, string password);
@@ -26,6 +29,9 @@ namespace DatabaseTables.Services
         // Users hardcoded for simplicity, store in a db with hashed password in production applicatiaons. 
         // TODO: Put this inside the database. 
         // Get this from the database instead.
+        /// <summary>
+        /// 
+        /// </summary>
         private List<User> _user = new List<User>
         {
             new User { Id = 1, FirstName = "admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin},
@@ -34,11 +40,21 @@ namespace DatabaseTables.Services
 
         private readonly AppSettings _appSettings;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appSettings"></param>
         public UserService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public User Authenticate(string username, string password)
         {
             var user = _user.SingleOrDefault(x => x.Username == username && x.Password == password);
@@ -70,6 +86,10 @@ namespace DatabaseTables.Services
             return user;            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<User> GetAll()
         {
             return _user.Select(x =>
@@ -79,6 +99,11 @@ namespace DatabaseTables.Services
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User GetById(int id)
         {
             var user = _user.FirstOrDefault(x => x.Id == id);
