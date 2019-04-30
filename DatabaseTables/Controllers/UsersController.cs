@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication;
+// using Microsoft.AspNetCore.Authentication;
 using DatabaseTables.Services;
 using DatabaseTables.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +27,11 @@ namespace DatabaseTables.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userParam"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
@@ -39,6 +44,10 @@ namespace DatabaseTables.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
@@ -46,7 +55,12 @@ namespace DatabaseTables.Controllers
             var users = _userService.GetAll();
             return Ok(users);
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
