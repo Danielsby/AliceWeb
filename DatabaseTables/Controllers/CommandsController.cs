@@ -8,6 +8,9 @@ using DatabaseTables.Models;
 
 namespace DatabaseTables.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CommandsController : ControllerBase
@@ -17,6 +20,10 @@ namespace DatabaseTables.Controllers
         public CommandsController(CommandContext context) => _context = context;
 
         // GET: api/commands.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetCommands()
         {
@@ -24,6 +31,11 @@ namespace DatabaseTables.Controllers
         }
 
         // GET: api/commands/n
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<Command> GetCommandItem(int id)
         {
@@ -38,6 +50,11 @@ namespace DatabaseTables.Controllers
         }
 
         // POST: api/commands
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<Command> PostCommandItem(Command command)
         {
@@ -48,6 +65,12 @@ namespace DatabaseTables.Controllers
         }
 
         // PUT: api/commands/n
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult PutCommandItem(int id, Command command)
         {
@@ -63,6 +86,11 @@ namespace DatabaseTables.Controllers
         }
 
         // DELETE: api/commands/n
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult<Command> DeleteCommandItem(int id)
         {

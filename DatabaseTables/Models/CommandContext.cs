@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CommandContext : DbContext
     {
         public CommandContext(DbContextOptions<CommandContext> options) : base(options)
