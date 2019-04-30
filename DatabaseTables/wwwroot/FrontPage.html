@@ -8,18 +8,19 @@
     <script type="text/javascript" src="./js/JSFile.js"></script>
 
 
+    <!--Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
 </head>
 
 <body>
 
     <div class="grid-container">
         <div class="item1">
+        
 
-            <div class="Logo">
-                <a href="default.html">
-                    <img src="./images/AliceLogo.png" alt="Alice Logo" height=200px width=auto>
-                </a>
-           </div>
+
 
             <!--Dette er horisontal meny, ikke vertical. Jeg har skrevet feil, rydder i dette senere-->
             <div class="verticalmenu">
@@ -34,7 +35,7 @@
                         <li style="float:right">
                             <div class="dropdown">
 
-                                <button onclick="myFunction()" class="dropbtn">User</button>
+                                <button onclick="myFunction()" class="dropbtn"><i class='fas fa-user'></i> User <i class='fas fa-angle-down'></i></button>
                                 <div id="User" class="dropdown-content">
                                     <a href="./default.html">Logout</a>
                                     <a href="./default.html">Some</a>
@@ -49,13 +50,14 @@
                         <li style="float: right">
                             <div class="dropdown">
 
-                                <button onclick="myFunction2()" class="dropbtn">Settings</button>
+                              
+                                <button onclick="myFunction2()" class="dropbtn"><i class='fas fa-cog'></i> Settings <i class='fas fa-angle-down'></i></button>
                                 <div id="Settings" class="dropdown-content">
                                     <a href="./default.html">Set</a>
                                     <a href="./default.html">tin</a>
                                     <a href="./default.html">gs</a>
 
-                                 
+
 
                                 </div>
                             </div>
@@ -73,6 +75,14 @@
 
 
         <div class="item2">
+
+
+            <div class="Logo">
+                <a href="default.html">
+                    <img src="./images/AliceLogo.png" alt="Alice Logo" height=200px width=auto>
+                </a>
+            </div>
+
 
             <div class="menu">
                 <ul>

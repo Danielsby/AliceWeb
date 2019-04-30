@@ -2,62 +2,48 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alice Homepage</title>
 
     <!-- css -->
-    <link rel="stylesheet" type="text/css" href="./css/CSSFile.css">
+    <link rel="stylesheet" type="text/css" href="./css/logincss.css">
     <!-- js -->
 
 </head>
+
+
 <body>
-    <header>
-        <h1></h1>
-    </header>
 
+    <div class="loginlogo">
 
-    <div class="section group">
-        <div class="col span_1_of_2">
-
-
-            <div id="AliceLogin">
-                <!--linker til forsiden her for enkelhetens skyld - midlertidig -->
-                <a href="./frontpage.html">
-                    <img src="./images/AliceLogo.png" alt="Alice Logo" height=450px width=auto>
-                </a>
-            </div>
-
-
-
-        </div>
-        <div class="col span_1_of_2">
-
-            <h1>LCH - ALICE</h1>
-
-            <h2>Detector Control System</h2>
-
-            <div id="login">
-                <form action="">
-                    Username:<br>
-                    <input type="text" name="username" />
-                    <br>
-                    Password:<br />
-                    <input type="text" name="password" />
-                    <br />
-                    <input type="submit" value="Login">
-                </form>
-            </div>
-
-
-         
-        </div>
+        <!--linker til forsiden her for enkelhetens skyld - midlertidig -->
+        <a href="./frontpage.html">
+            <img src="./images/AliceLogo.png" alt="Alice Logo" height=450px width=auto>
+        </a>
     </div>
 
+    <div class="loginright">
 
+        <h1>LCH - ALICE</h1>
+        <h2>Detector Control System</h2>
 
+        <div class="form">
+            <form action="">
 
+                <input type="text" name="username" placeholder="Username" />
+                <br />
+                <input type="text" name="password" placeholder="Password"/>
+                <br />
+                <br />
+                <input type="submit" value="Login">
+                <br />
 
+            </form>
 
+            
 
+        </div>
+        </div>
 
 </body>
 </html>
