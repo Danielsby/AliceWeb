@@ -9,7 +9,7 @@ using DatabaseTables.Models;
 namespace DatabaseTables.Controllers
 {
     /// <summary>
-    /// 
+    /// Dataflow. 
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -21,7 +21,7 @@ namespace DatabaseTables.Controllers
 
         // GET: api/commands.
         /// <summary>
-        /// 
+        /// Retrieve the data. 
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -32,9 +32,9 @@ namespace DatabaseTables.Controllers
 
         // GET: api/commands/n
         /// <summary>
-        /// 
+        /// Retrieve the row based on the id-number. 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id of the data-row.</param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<Command> GetCommandItem(int id)
@@ -51,7 +51,7 @@ namespace DatabaseTables.Controllers
 
         // POST: api/commands
         /// <summary>
-        /// 
+        /// Add a new row. 
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
