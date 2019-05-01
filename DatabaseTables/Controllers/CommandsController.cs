@@ -51,7 +51,7 @@ namespace DatabaseTables.Controllers
 
         // POST: api/commands
         /// <summary>
-        /// Add a new row. 
+        /// Add data. 
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>

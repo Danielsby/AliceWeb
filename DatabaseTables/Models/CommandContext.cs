@@ -17,6 +17,7 @@ namespace DatabaseTables.Models
         /// <param name="options"></param>
         public CommandContext(DbContextOptions<CommandContext> options) : base(options)
         {
+
         }
 
         /// <summary>

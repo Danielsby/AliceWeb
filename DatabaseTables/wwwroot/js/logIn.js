@@ -1,23 +1,25 @@
 ﻿/**
- * Put username and password,
- * inside the user table with Ajax. 
+ * JQUERY
  */
-function testFunction() {
-    var xhttp = new XMLHttpRequest();
-    // console.log("User: "); <-- Test-function. 
-    console.log(username_id);
-    console.log("tries to log in");
-    
-    // Receive and treat the response from the backend. 
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+
+// const uri = "api/command";
+// let todos = null;
+
+// Boilerplate JQuery request. 
+function LogIn() {
+    $.ajax({
+        type: "POST",
+        // accepts: "application/json"
+        url: "api/login",
+        username: username,
+        password: password,
+        contentType: "application/json",
+        data: JSON.stringify(item), // Send usernamea and password.
+        error: function (jqXJR, txtStatus, errorThrown) {
+            alert("Something went wrong!");
+        },
+        success: function (result) {
+            getData();
         }
-    };
-
-    // Send request. 
-    // xhttp.open("GET", "http://localhost:5000/api/commands/1", true);
-
-    // Redirect to the front-page. <-- Happens in the backend?
-    xhttp.send();
+    })
 }
