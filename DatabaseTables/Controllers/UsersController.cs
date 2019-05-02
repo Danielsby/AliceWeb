@@ -34,7 +34,7 @@ namespace DatabaseTables.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="userParam"></param>
+        /// <param name="userParam"> Receives username and password from body. </param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -49,9 +49,9 @@ namespace DatabaseTables.Controllers
         }
 
         /// <summary>
-        /// 
+        /// To check the users status.  
         /// </summary>
-        /// <returns></returns>
+        /// <returns>All users</returns>
         [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
@@ -61,10 +61,10 @@ namespace DatabaseTables.Controllers
         }
         
         /// <summary>
-        /// 
+        /// To check if the user exist. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id"> The ID of the user. </param>
+        /// <returns> The selected user based on the ID. </returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -75,7 +75,7 @@ namespace DatabaseTables.Controllers
                 return NotFound();
             }
 
-            // Only allow admins to access other user recoreds
+            // Only allow admins to access other user recoreds.
             var currentUserId = int.Parse(User.Identity.Name);
             if (id != currentUserId && !User.IsInRole(Role.Admin))
             {

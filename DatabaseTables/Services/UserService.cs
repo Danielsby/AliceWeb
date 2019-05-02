@@ -10,6 +10,7 @@ using DatabaseTables.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
+using System.Data.SqlClient;
 
 // Business logic, validation and database access code for users. 
 namespace DatabaseTables.Services
@@ -28,16 +29,27 @@ namespace DatabaseTables.Services
     {
         // Users hardcoded for simplicity, store in a db with hashed password in production applicatiaons. 
         // TODO: Put this inside the database. 
-        // Get this from the database instead.
-        /// <summary>
-        /// 
-        /// </summary>
+        // Get this from the database instead
         private List<User> _user = new List<User>
         {
             new User { Id = 1, FirstName = "admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin},
             new User { Id = 1, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User }
         };
 
+
+        private List<User> _fromDatabase = new List<User>
+        {
+
+        };
+
+        // SQL Query 
+        string sql = "SELECT * FROM users";
+
+        
+                    
+       
+
+        
         private readonly AppSettings _appSettings;
 
         /// <summary>
