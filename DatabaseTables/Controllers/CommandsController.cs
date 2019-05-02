@@ -9,7 +9,7 @@ using DatabaseTables.Models;
 namespace DatabaseTables.Controllers
 {
     /// <summary>
-    /// Dataflow. 
+    /// This controller will represent the testdata. 
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]

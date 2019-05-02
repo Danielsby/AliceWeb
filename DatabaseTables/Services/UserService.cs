@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using System.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
 
 // Business logic, validation and database access code for users. 
 namespace DatabaseTables.Services
@@ -30,6 +31,7 @@ namespace DatabaseTables.Services
         // Users hardcoded for simplicity, store in a db with hashed password in production applicatiaons. 
         // TODO: Put this inside the database. 
         // Get this from the database instead
+        // Represent type of user. 
         private List<User> _user = new List<User>
         {
             new User { Id = 1, FirstName = "admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin},
@@ -42,14 +44,25 @@ namespace DatabaseTables.Services
 
         };
 
-        // SQL Query 
+        SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+
+
+        /*
+         *  
+         *
+         * 
+         */
+        // SQL Query.
         string sql = "SELECT * FROM users";
+        // Connection string.
+        string connString = "ConnectionString";
 
-        
-                    
-       
 
-        
+        // DataContext db = new DataContext("connectionstring");
+
+
+
+
         private readonly AppSettings _appSettings;
 
         /// <summary>
@@ -83,9 +96,9 @@ namespace DatabaseTables.Services
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Role, user.Role) 
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7), // 7 days expire-date. 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -115,7 +128,7 @@ namespace DatabaseTables.Services
         /// 
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns> User. </returns>
         public User GetById(int id)
         {
             var user = _user.FirstOrDefault(x => x.Id == id);

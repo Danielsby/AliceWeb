@@ -34,8 +34,8 @@ namespace DatabaseTables.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="userParam"> Receives username and password from body. </param>
-        /// <returns></returns>
+        /// <param name="userParam"> username and password from body. </param>
+        /// <returns> Status based on the userparams. </returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
