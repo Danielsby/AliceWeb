@@ -26,7 +26,7 @@ namespace DatabaseTables.Models
         public DbSet<Command> CommandItems { get; set; }
 
         /// <summary>
-        /// 
+        /// User method for database. 
         /// </summary>
         public DbSet<User> Users { get; set;  }
     }

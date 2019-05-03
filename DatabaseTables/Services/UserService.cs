@@ -28,8 +28,23 @@ namespace DatabaseTables.Services
 
     public class UserService : IUserService
     {
+        private readonly CommandContext _context;
+
+        public UserService(CommandContext context) => _context = context;
+
+        private IUserService _userService;
+
+        /*
+        private void CreateConnection()
+        {
+            string ConnStr = ConfigurationManager.ConnectionString["ConnStr"].ConnectionString;
+            Conn = new SqlConnection(ConnStr);
+        }
+        */
+
+
         // Users hardcoded for simplicity, store in a db with hashed password in production applicatiaons. 
-        // TODO: Put this inside the database. 
+        // TODO: Get this from the database. 
         // Get this from the database instead
         // Represent type of user. 
         private List<User> _user = new List<User>
@@ -38,30 +53,37 @@ namespace DatabaseTables.Services
             new User { Id = 1, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User }
         };
 
+        List<User> _userList = new List<User>();
 
-        private List<User> _fromDatabase = new List<User>
+        public void emptyList()
         {
+            _userList = null;
+        }
 
-        };
+        public void fillList()
+        { 
+            int counter = 0;
 
-        SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            while (true)
+            {
+                // TODO: Use list instead.
+                 _userList  _context.Users.Find(counter);
 
+                if (commandItem == null)
+                {
+                    break; // The list is filled. 
+                }
 
-        /*
-         *  
-         *
-         * 
-         */
+                counter++;
+            }
+        }
+        
         // SQL Query.
         string sql = "SELECT * FROM users";
         // Connection string.
         string connString = "ConnectionString";
 
-
         // DataContext db = new DataContext("connectionstring");
-
-
-
 
         private readonly AppSettings _appSettings;
 
@@ -82,6 +104,14 @@ namespace DatabaseTables.Services
         /// <returns></returns>
         public User Authenticate(string username, string password)
         {
+            // Update phase before authentication. 
+
+            // Retrieve the current userdata from the database in here instead.
+            // Empty the list. 
+            emptyList();
+            // Fill the list. 
+            fillList();
+
             var user = _user.SingleOrDefault(x => x.Username == username && x.Password == password);
 
             // Return null if user not found.

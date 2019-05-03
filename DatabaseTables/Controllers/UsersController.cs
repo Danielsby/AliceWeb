@@ -20,6 +20,10 @@ namespace DatabaseTables.Controllers
     /// </summary>
     public class UsersController : ControllerBase
     {
+        private readonly CommandContext _context;
+
+        public UsersController(CommandContext context) => _context = context;
+
         private IUserService _userService;
 
         /// <summary>
@@ -40,6 +44,7 @@ namespace DatabaseTables.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
+            // Send from database instead. 
             var user = _userService.Authenticate(userParam.Username, userParam.Password);
 
             if (user == null)

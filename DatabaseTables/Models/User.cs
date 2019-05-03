@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 namespace DatabaseTables.Models
 {
     /// <summary>
-    /// Represent the data stored in the databas for users. 
-    /// It's used by Entity Framework Core to map relational data from the
-    /// database into .NET objects for data management and CRUD operations. 
+    /// Creates User table in the SQL database. 
     /// </summary>
     public class User
     {

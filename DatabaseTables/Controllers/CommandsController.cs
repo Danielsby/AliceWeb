@@ -27,7 +27,7 @@ namespace DatabaseTables.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetCommands()
         {
-            return _context.CommandItems;
+            return _context.CommandItems; // Return the whole table. 
         }
 
         // GET: api/commands/n
@@ -35,7 +35,7 @@ namespace DatabaseTables.Controllers
         /// Retrieve the row based on the id-number. 
         /// </summary>
         /// <param name="id">id of the data-row.</param>
-        /// <returns></returns>
+        /// <returns>The object with the parameter id. </returns>
         [HttpGet("{id}")]
         public ActionResult<Command> GetCommandItem(int id)
         {
@@ -45,21 +45,21 @@ namespace DatabaseTables.Controllers
             {
                 return NotFound();
             }
-
+            
             return commandItem;
         }
 
         // POST: api/commands
         /// <summary>
-        /// Add data. 
+        /// Add data.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult<Command> PostCommandItem(Command command)
         {
-            _context.CommandItems.Add(command);
-            _context.SaveChanges();
+            _context.CommandItems.Add(command); // Adding to the database.
+            _context.SaveChanges(); // When you save something to the database. 
 
             return CreatedAtAction("PostCommandItem", new Command { Id = command.Id }, command);
         }
