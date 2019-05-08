@@ -11,7 +11,7 @@ namespace DatabaseTables.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Role
+    public static class Role
     {
         public const string Admin = "Admin";
         public const string User = "User";

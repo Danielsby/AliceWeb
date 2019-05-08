@@ -48,13 +48,12 @@ namespace DatabaseTables
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // services.AddAutoMapper();
 
             //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
             services.AddDbContext<CommandContext>
             (opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:ConnectionString"]));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Configure strongly typed settings objects. 
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -66,9 +65,11 @@ namespace DatabaseTables
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
 
+            // 
+            /*
             .AddJwtBearer(x =>
             {
                 x.Events = new JwtBearerEvents
@@ -86,8 +87,6 @@ namespace DatabaseTables
 
                         return Task.CompletedTask;
                     }
-
-
                 };
 
                 x.RequireHttpsMetadata = false;
@@ -100,19 +99,32 @@ namespace DatabaseTables
                     ValidateAudience = false
                  };
             });
+            */
+
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             services.AddScoped<IUserService, UserService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// <summary>
-        /// 
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -121,12 +133,22 @@ namespace DatabaseTables
             {
                 app.UseHsts();
             }
+            */
 
-            // Allow Cors policy. 
+            // Allow Cors policy.
+            /*
             app.UseCors(
                 options => options.WithOrigins("http://localhost:5000").AllowAnyMethod()
             );
+            */
+            
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
+
+            app.UseAuthentication();
             app.UseDefaultFiles(); // Serve homepage.
             app.UseStaticFiles(); // Serve static files from wwwroot. 
 

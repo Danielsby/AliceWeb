@@ -2,24 +2,15 @@
  * JQUERY
  */
 
-// const uri = "api/command";
-// let todos = null;
-
-// Boilerplate JQuery request. 
-function LogIn() {
+$("test").click(function (e) {
+    e.preventDefault();
     $.ajax({
         type: "POST",
-        // accepts: "application/json"
-        url: "api/login",
-        username: username,
-        password: password,
-        contentType: "application/json",
-        data: JSON.stringify(item), // Send usernamea and password.
-        error: function (jqXJR, txtStatus, errorThrown) {
-            alert("Something went wrong!");
-        },
-        success: function (result) {
-            getData();
-        }
-    })
-}
+        url: "http://localhost:5000/api/users/authenticate",
+        data: { username: "admin", password: "admin" },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) 
+            console.log(data);
+    });
+});

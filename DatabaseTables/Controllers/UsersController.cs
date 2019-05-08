@@ -18,14 +18,17 @@ namespace DatabaseTables.Controllers
     /// On successful authentication the authenticate method generates a JWT using JwtSecurityTokenHandler class. 
     /// It generates a token, digital signed by using the secret key in appsettings.json. 
     /// </summary>
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly CommandContext _context;
-
-        public UsersController(CommandContext context) => _context = context;
+        // private readonly CommandContext _context;
+        
+        // public UsersController(CommandContext context) => _context = context;
 
         private IUserService _userService;
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -44,13 +47,15 @@ namespace DatabaseTables.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
-            // Send from database instead. 
+            // Send from database instead.
             var user = _userService.Authenticate(userParam.Username, userParam.Password);
 
             if (user == null)
+            {
                 return BadRequest(new { message = "Username or password is incorrect" });
+            }
 
-            return Ok(user);
+            return Ok(user);  
         }
 
         /// <summary>
