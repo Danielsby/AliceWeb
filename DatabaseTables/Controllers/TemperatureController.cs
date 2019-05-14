@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DatabaseTables.Models;
+// using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DatabaseTables.Controllers
 {
@@ -13,11 +14,11 @@ namespace DatabaseTables.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class CommandsController : ControllerBase
+    public class DataController : ControllerBase
     {
-        private readonly CommandContext _context;
+        private readonly DataContext _context;
 
-        public CommandsController(CommandContext context) => _context = context;
+        public DataController(DataContext context) => _context = context;
 
         // GET: api/commands.
         /// <summary>
@@ -25,9 +26,9 @@ namespace DatabaseTables.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetCommands()
+        public ActionResult<IEnumerable<Temperature>> GetData()
         {
-            return _context.CommandItems; // Return the whole table. 
+            return _context.TemperatureValues; // Return the whole table. 
         }
 
         // GET: api/commands/n
@@ -37,9 +38,9 @@ namespace DatabaseTables.Controllers
         /// <param name="id">id of the data-row.</param>
         /// <returns>The object with the parameter id. </returns>
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandItem(int id)
+        public ActionResult<Temperature> GetDataById(int id)
         {
-            var commandItem = _context.CommandItems.Find(id);
+            var commandItem = _context.TemperatureValues.Find(id);
 
             if (commandItem == null)
             {
@@ -55,14 +56,16 @@ namespace DatabaseTables.Controllers
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
+        /*
         [HttpPost]
-        public ActionResult<Command> PostCommandItem(Command command)
+        public ActionResult<Data> PostData(Data command)
         {
-            _context.CommandItems.Add(command); // Adding to the database.
+            _context.TemperatureValues.Add(command); // Adding to the database.
             _context.SaveChanges(); // When you save something to the database. 
 
-            return CreatedAtAction("PostCommandItem", new Command { Id = command.Id }, command);
+            return CreatedAtAction("PostData", new Command { Id = command.Id }, command);
         }
+        */
 
         // PUT: api/commands/n
         /// <summary>
@@ -71,8 +74,9 @@ namespace DatabaseTables.Controllers
         /// <param name="id"></param>
         /// <param name="command"></param>
         /// <returns></returns>
+        /*
         [HttpPut("{id}")]
-        public ActionResult PutCommandItem(int id, Command command)
+        public ActionResult PutData(int id, Data command)
         {
             if (id != command.Id)
             {
@@ -84,6 +88,7 @@ namespace DatabaseTables.Controllers
 
             return NoContent();
         }
+        */
 
         // DELETE: api/commands/n
         /// <summary>
@@ -91,19 +96,21 @@ namespace DatabaseTables.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /*
         [HttpDelete("{id}")]
-        public ActionResult<Command> DeleteCommandItem(int id)
+        public ActionResult<Data> DeleteData(int id)
         {
-            var commandItem = _context.CommandItems.Find(id);
+            var commandItem = _context.TemperatureValues.Find(id);
             if (commandItem == null)
             {
                 return NotFound();
             }
 
-            _context.CommandItems.Remove(commandItem);
+            _context.DataValues.Remove(commandItem);
             _context.SaveChanges();
 
             return commandItem;
         }
+        */
     }
 }

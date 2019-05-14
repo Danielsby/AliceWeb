@@ -9,24 +9,29 @@ namespace DatabaseTables.Models
     /// <summary>
     /// 
     /// </summary>
-    public class CommandContext : DbContext
+    public class DataContext : DbContext
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public CommandContext(DbContextOptions<CommandContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
         /// <summary>
-        /// 
+        /// For temperature 
         /// </summary>
-        public DbSet<Command> CommandItems { get; set; }
+        public DbSet<Temperature> TemperatureValues { get; set; }
 
         /// <summary>
-        /// User method for database.
+        /// For Volt
+        /// </summary>
+        public DbSet<Amper> VoltValues { get; set; }
+
+        /// <summary>
+        /// For users. 
         /// </summary>
         public DbSet<User> Users { get; set;  }
     }

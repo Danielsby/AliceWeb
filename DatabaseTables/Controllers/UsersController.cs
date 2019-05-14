@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
 // using Microsoft.AspNetCore.Authentication;
 using DatabaseTables.Services;
 using DatabaseTables.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace DatabaseTables.Controllers
 {
@@ -23,12 +18,14 @@ namespace DatabaseTables.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
+        // private const string V = "http://localhost:5000";
+
         // private readonly CommandContext _context;
-        
+
         // public UsersController(CommandContext context) => _context = context;
 
         private IUserService _userService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -44,18 +41,19 @@ namespace DatabaseTables.Controllers
         /// <param name="userParam"> username and password from body. </param>
         /// <returns> Status based on the userparams. </returns>
         [AllowAnonymous]
+        [EnableCors]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User userParam)
+        public IActionResult AuthenticateUser([FromBody]User userParam)
         {
             // Send from database instead.
-            var user = _userService.Authenticate(userParam.Username, userParam.Password);
+            var user = _userService.AuthenticateUser(userParam.Username, userParam.Password);
 
             if (user == null)
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new { message = "Username or password is not correct. Please try again. " });
             }
 
-            return Ok(user);  
+            return Ok(user);
         }
 
         /// <summary>
@@ -63,20 +61,22 @@ namespace DatabaseTables.Controllers
         /// </summary>
         /// <returns>All users</returns>
         [Authorize(Roles = Role.Admin)]
+        [EnableCors]
         [HttpGet]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
             return Ok(users);
         }
-        
+
         /// <summary>
         /// To check if the user exist. 
         /// </summary>
         /// <param name="id"> The ID of the user. </param>
         /// <returns> The selected user based on the ID. </returns>
+        [EnableCors]
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetIdUser(int id)
         {
             var user = _userService.GetById(id);
             

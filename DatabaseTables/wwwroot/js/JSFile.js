@@ -1,4 +1,4 @@
-﻿/* When the user clicks on the button, 
+﻿/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("User").classList.toggle("show");
@@ -14,8 +14,8 @@ window.onclick = function(e) {
   }
 }
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
+// When the user clicks on the button, 
+// toggle between hiding and showing the dropdown content 
 function myFunction2() {
   document.getElementById("Settings").classList.toggle("show");
 }

@@ -14,14 +14,14 @@ namespace DatabaseTables.Services
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
+        User AuthenticateUser(string username, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }
 
     public class UserService : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
+        // Should be in the database later. 
         private List<User> _users = new List<User>
         {
             new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
@@ -35,16 +35,17 @@ namespace DatabaseTables.Services
             _appSettings = appSettings.Value;
         }
 
-        public User Authenticate(string username, string password)
+        // Method for checking authentication. 
+        public User AuthenticateUser(string username, string password)
         {
             var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
-            // return null if user not found
+            // User does not exist. 
             if (user == null)
                 return null;
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
+            // Authentication is successful, so generate jwt token
+            var tokenCreater = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -58,8 +59,8 @@ namespace DatabaseTables.Services
             };
 
             IdentityModelEventSource.ShowPII = true;
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+            var token = tokenCreater.CreateToken(tokenDescriptor);
+            user.Token = tokenCreater.WriteToken(token);
 
             // remove password before returning
             user.Password = null;
@@ -67,6 +68,12 @@ namespace DatabaseTables.Services
             return user;
         }
 
+
+
+
+
+
+        // Remove(?) 
         public IEnumerable<User> GetAll()
         {
             // return users without passwords
