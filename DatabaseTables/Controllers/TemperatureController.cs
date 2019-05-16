@@ -14,11 +14,11 @@ namespace DatabaseTables.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class DataController : ControllerBase
+    public class TemperatureController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public DataController(DataContext context) => _context = context;
+        public TemperatureController(DataContext context) => _context = context;
 
         // GET: api/commands.
         /// <summary>
@@ -46,7 +46,7 @@ namespace DatabaseTables.Controllers
             {
                 return NotFound();
             }
-            
+
             return commandItem;
         }
 

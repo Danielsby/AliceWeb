@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DatabaseTables.Models
 {
     /// <summary>
-    /// 
+    /// To have to different roles with its their rights.
     /// </summary>
     public static class Role
     {

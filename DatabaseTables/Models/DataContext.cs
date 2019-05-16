@@ -7,14 +7,10 @@ using Microsoft.EntityFrameworkCore;
 namespace DatabaseTables.Models
 {
     /// <summary>
-    /// 
+    /// Where the class communicate with the database. 
     /// </summary>
     public class DataContext : DbContext
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="options"></param>
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 

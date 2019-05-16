@@ -24,7 +24,6 @@ namespace DatabaseTables.Controllers
         /// <summary>
         /// Retrieve the data. 
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<Amper>> GetData()
         {

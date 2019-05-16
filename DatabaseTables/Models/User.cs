@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace DatabaseTables.Models
 {
     /// <summary>
-    /// Creates User table in the SQL database. 
+    /// Represent the user data information.  
     /// </summary>
     public class User
     {

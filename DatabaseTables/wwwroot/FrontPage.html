@@ -85,19 +85,58 @@
 
         <div class="item3">
             <canvas id="myChart"></canvas>
+            <button type="button">Fix the issue!</button>
+            <button type="button">Check number of errors!</button>
+
+            <!--
+            <div id="footer">
+                <p>Copyright (c) 2010 mysite.com All rights reserved</p>
+            </div>
+            -->
+
+            <footer>
+                <p>Copyright (c) 2019 Bachelor thesis </p>
+            </footer>
         </div>
 
         <div class="item4"></div>
         <div class="item5"></div>
     </div>
 
+
     <script>
         // Create chart.
+        // TODO: Get data from request. 
+        // TODO: Update chart.
+        // TODO: Show both Amper and Temperature.
         var ctx = document.getElementById('myChart').getContext('2d');
-
-        // Get numbers from database:
+        var numbers = [4, 3, 5, 5];
         
-        var numbers = [5, 6, 5, 5]; 
+        // Get numbers from database
+        // GetRequest. 
+        var url = "http://localhost:5000/api/temperature";
+        var jsonString = test(url);
+
+        const obj = JSON.parse(jsonString);
+
+        console.log(Object.values(obj));
+
+        const object1 = {
+          a: 'somestring',
+          b: 42,
+          c: false
+        };
+
+        console.log(Object.values(object1));
+
+        alert(obj.oneHour);
+        
+        function test(url) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", url, false);
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
 
         var chart = new Chart(ctx, {
             // The type of chart we want to create
@@ -110,7 +149,6 @@
                     label: 'Measurements',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    // data: [4, 10, 5, 2]
                     data: numbers
                 }]
             },
@@ -118,12 +156,10 @@
             options: {}
         });
 
-        window.onload = function test(numbers) {
-            const x = [7, 5, 5, 6];
-
+        window.onload = function test() {
             for (i = 0; i < numbers.length; i++) {
                 if (numbers[i] < 5) {
-                    window.confirm("One of the values are too low.");
+                    window.confirm("One of the values are too low. Click the button.");
                 }
             }
         }
