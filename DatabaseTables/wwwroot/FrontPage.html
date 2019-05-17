@@ -84,22 +84,89 @@
         </div>
 
         <div class="item3">
+        <!--
+            Display relevant data to the user.
+            Default: from the alice-detector.
+        -->
             <canvas id="myChart"></canvas>
+
+            <!-- Go back to alice data. -->
+            <button type="button" id="default">Detector</button>
+
+
+            <!-- Send a GET request and show on graph from Log. -->
+            <button type="button" id="errors">Errors</button>
+
+            <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
+            <button type="button" id="issue">Fix issues</button>
+
+            <!-- For information. -->
+            <footer>
+                <p>Copyright (c) 2019 Bachelor thesis </p>
+            </footer>
         </div>
 
+        <!-- Show something in these(?).  -->
         <div class="item4"></div>
         <div class="item5"></div>
     </div>
 
+
     <script>
-        // Create chart.
-        var ctx = document.getElementById('myChart').getContext('2d');
+        // TODO: Get data from request. 
+        // TODO: Update chart.
+        // TODO: Show both Amper and Temperature.
 
-        // Get numbers from database:
+
+        /** Variables. */
         
-        var numbers = [5, 6, 5, 5]; 
+        var errors = 4; // TODO: Replace with database data. 
+        var aliceAmp = [5, 2, 3, 6]; // TODO: Replace with database data.
+        var aliceTemp = [4, 3, 5, 5]; // TODO: Replace with database data. 
 
-        var chart = new Chart(ctx, {
+        /*
+        var url = "http://localhost:5000/api/temperature";
+        var jsonString = test(url);
+        const obj = JSON.parse(jsonString);
+        console.log(Object.values(obj));
+
+        const object1 = {
+          a: 'somestring',
+          b: 42,
+          c: false
+        };
+        */
+
+
+        /** Tests */
+
+        // console.log(Object.values(object1));
+        // alert(obj.oneHour);
+
+
+        /** Functions. */
+
+        /*
+         * Retrieve the data from the server. 
+         */
+        function test(url) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", url, false);
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
+
+        /* 
+         * Change too low values into big enough values. 
+        function fixError() {
+
+        }
+        */
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        /** Create the chart to show relevant data. */
+        var myChart = new Chart(ctx, {
+
             // The type of chart we want to create
             type: 'line',
 
@@ -110,20 +177,18 @@
                     label: 'Measurements',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    // data: [4, 10, 5, 2]
                     data: numbers
                 }]
             },
             // Configuration options go here
             options: {}
-        });
+        }); // End of create a chart. 
 
-        window.onload = function test(numbers) {
-            const x = [7, 5, 5, 6];
-
+        /* Load function to check the status of the page. */
+        window.onload = function test() {
             for (i = 0; i < numbers.length; i++) {
                 if (numbers[i] < 5) {
-                    window.confirm("One of the values are too low.");
+                    window.confirm("One of the values are too low. Click the button.");
                 }
             }
         }
@@ -135,7 +200,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
 </body>
 </html>
