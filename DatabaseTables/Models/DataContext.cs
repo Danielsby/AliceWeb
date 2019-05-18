@@ -14,7 +14,7 @@ namespace DatabaseTables.Models
         }
 
         public DbSet<Temperature> TemperatureValues { get; set; }
-        public DbSet<Amper> VoltValues { get; set; }
+        public DbSet<Sector> Status { get; set; }
         public DbSet<User> Users { get; set;  }
         public DbSet<Log> Clicks { get; set; }
     }

@@ -12,11 +12,11 @@ namespace DatabaseTables.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DataController : ControllerBase
+    public class TemperatureController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public DataController(DataContext context) => _context = context;
+        public TemperatureController(DataContext context) => _context = context;
 
         [HttpGet]
         public ActionResult<IEnumerable<Temperature>> GetData()

@@ -11,22 +11,22 @@ namespace DatabaseTables.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AmperController : ControllerBase
+    public class SectorController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public AmperController(DataContext context) => _context = context;
+        public SectorController(DataContext context) => _context = context;
 
         [HttpGet]
-        public ActionResult<IEnumerable<Amper>> GetData()
+        public ActionResult<IEnumerable<Sector>> GetData()
         {
-            return _context.VoltValues; // Return the whole table. 
+            return _context.Status; // Return the whole table. 
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Amper> GetDataById(int id)
+        public ActionResult<Sector> GetDataById(int id)
         {
-            var commandItem = _context.VoltValues.Find(id);
+            var commandItem = _context.Status.Find(id);
 
             if (commandItem == null)
             {

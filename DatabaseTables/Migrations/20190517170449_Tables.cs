@@ -21,17 +21,32 @@ namespace DatabaseTables.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TemperatureValues",
+                name: "Status",
                 columns: table => new
                 {
-                    OneHour = table.Column<int>(nullable: false)
+                    SectorNumber = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TwoHours = table.Column<string>(nullable: true),
-                    ThreeHours = table.Column<string>(nullable: true)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TemperatureValues", x => x.OneHour);
+                    table.PrimaryKey("PK_Status", x => x.SectorNumber);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TemperatureValues",
+                columns: table => new
+                {
+                    TempID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OneHour = table.Column<int>(nullable: false),
+                    TwoHours = table.Column<int>(nullable: false),
+                    ThreeHours = table.Column<int>(nullable: false),
+                    fourHours = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemperatureValues", x => x.TempID);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,21 +66,6 @@ namespace DatabaseTables.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "VoltValues",
-                columns: table => new
-                {
-                    OneHour = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TwoHours = table.Column<string>(nullable: true),
-                    ThreeHours = table.Column<string>(nullable: true),
-                    FourHours = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VoltValues", x => x.OneHour);
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -74,13 +74,13 @@ namespace DatabaseTables.Migrations
                 name: "Clicks");
 
             migrationBuilder.DropTable(
+                name: "Status");
+
+            migrationBuilder.DropTable(
                 name: "TemperatureValues");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "VoltValues");
         }
     }
 }

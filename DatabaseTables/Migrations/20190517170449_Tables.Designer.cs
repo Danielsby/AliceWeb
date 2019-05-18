@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseTables.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190517102318_Tables")]
+    [Migration("20190517170449_Tables")]
     partial class Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,23 +19,6 @@ namespace DatabaseTables.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DatabaseTables.Models.Amper", b =>
-                {
-                    b.Property<int>("OneHour")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FourHours");
-
-                    b.Property<string>("ThreeHours");
-
-                    b.Property<string>("TwoHours");
-
-                    b.HasKey("OneHour");
-
-                    b.ToTable("VoltValues");
-                });
 
             modelBuilder.Entity("DatabaseTables.Models.Log", b =>
                 {
@@ -50,17 +33,34 @@ namespace DatabaseTables.Migrations
                     b.ToTable("Clicks");
                 });
 
-            modelBuilder.Entity("DatabaseTables.Models.Temperature", b =>
+            modelBuilder.Entity("DatabaseTables.Models.Sector", b =>
                 {
-                    b.Property<int>("OneHour")
+                    b.Property<int>("SectorNumber")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ThreeHours");
+                    b.Property<int>("Status");
 
-                    b.Property<string>("TwoHours");
+                    b.HasKey("SectorNumber");
 
-                    b.HasKey("OneHour");
+                    b.ToTable("Status");
+                });
+
+            modelBuilder.Entity("DatabaseTables.Models.Temperature", b =>
+                {
+                    b.Property<int>("TempID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OneHour");
+
+                    b.Property<int>("ThreeHours");
+
+                    b.Property<int>("TwoHours");
+
+                    b.Property<int>("fourHours");
+
+                    b.HasKey("TempID");
 
                     b.ToTable("TemperatureValues");
                 });

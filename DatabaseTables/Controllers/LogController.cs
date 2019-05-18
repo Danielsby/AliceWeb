@@ -21,7 +21,6 @@ namespace DatabaseTables.Controllers
             return _context.Clicks;
         }
  
-        // OST: api/commands
         [HttpPost]
         public ActionResult<Log> PostData(Log command)
         {

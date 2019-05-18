@@ -9,8 +9,10 @@ namespace DatabaseTables.Models
     public class Temperature
     {
         [Key]
+        public int TempID { get; set; }
         public int OneHour { get; set; }
-        public string TwoHours { get; set; }
-        public string ThreeHours { get; set; }
+        public int TwoHours { get; set; }
+        public int ThreeHours { get; set; }
+        public int fourHours { get; set; }
     }
 }
