@@ -102,9 +102,6 @@
             <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
             <button type="button" id="issue">Solve</button>
 
-            <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
-            <button type="button" id="reset">Reset</button>
-
             <!-- For information. -->
             <footer>
                 <p>Copyright (c) 2019 Bachelor thesis </p>
@@ -336,30 +333,6 @@
 
             // Register the click. 
             var clickUrl = "http://localhost:5000/api/log/1";
-
-            var data = {};
-            data.id = sectorToChange;
-            var json = JSON.stringify(data);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", clickUrl, true);
-            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-            xhr.onload = function () {
-                if (xhr.readyState == 4 && xhr.status == "200") {
-
-                }
-            }
-
-            xhr.send(json);
-
-            chart.update();
-        }
-
-        /* Reset errors. */
-        document.getElementById("reset").onclick = function test() {
-
-            // Register the click. 
-            var clickUrl = "http://localhost:5000/api/reset/0";
 
             var data = {};
             data.id = sectorToChange;
