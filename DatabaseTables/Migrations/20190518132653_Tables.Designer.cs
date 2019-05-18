@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseTables.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190517170449_Tables")]
+    [Migration("20190518132653_Tables")]
     partial class Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,23 @@ namespace DatabaseTables.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Status");
+                    b.Property<bool>("Status1");
+
+                    b.Property<bool>("Status2");
+
+                    b.Property<bool>("Status3");
+
+                    b.Property<bool>("Status4");
+
+                    b.Property<bool>("Status5");
+
+                    b.Property<bool>("Status6");
+
+                    b.Property<bool>("Status7");
+
+                    b.Property<bool>("Status8");
+
+                    b.Property<bool>("Status9");
 
                     b.HasKey("SectorNumber");
 

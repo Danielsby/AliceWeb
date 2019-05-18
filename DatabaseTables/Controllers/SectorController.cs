@@ -36,34 +36,70 @@ namespace DatabaseTables.Controllers
             return commandItem;
         }
 
-        // POST: api/commands
-       /*
-        [HttpPost]
-        public ActionResult<Data> PostData(Data command)
-        {
-            _context.VoltValues.Add(command); // Adding to the database.
-            _context.SaveChanges(); // When you save something to the database. 
-
-            return CreatedAtAction("PostData", new Command { Id = command.Id }, command);
-        }
-        */
-
         // PUT: api/commands/n
-        /*
         [HttpPut("{id}")]
-        public ActionResult PutData(int id, Data command)
+        public ActionResult PutData(int id, Sector command)
         {
-            if (id != command.Id)
+            /*
+            if (id != command.SectorNumber)
             {
                 return BadRequest();
             }
+            */
 
-            _context.Entry(command).State = EntityState.Modified;
+            var row = _context.Status.Find(1);
+
+            switch (id)
+            {
+                case 1:
+                    row.Status1 = true;
+                    break;
+                case 2:
+                    row.Status2 = true;
+                    break;
+                case 3:
+                    row.Status3 = true;
+                    break;
+                case 4:
+                    row.Status4 = true;
+                    break;
+                case 5:
+                    row.Status5 = true;
+                    break;
+                case 6:
+                    row.Status6 = true;
+                    break;
+                case 7:
+                    row.Status7 = true;
+                    break;
+                case 8:
+                    row.Status8 = true;
+                    break;
+                case 9:
+                    row.Status9 = true;
+                    break;
+            }
+            
+            // _context.Entry(command).State = EntityState.Modified;
+            // _context.Attach(command);
+            // _context.Entry(command.Status4).Property("false").IsModified = true;
             _context.SaveChanges();
 
             return NoContent();
         }
-        */
+        
+        // POST: api/commands
+        /*
+         [HttpPost]
+         public ActionResult<Data> PostData(Data command)
+         {
+             _context.VoltValues.Add(command); // Adding to the database.
+             _context.SaveChanges(); // When you save something to the database. 
+
+             return CreatedAtAction("PostData", new Command { Id = command.Id }, command);
+         }
+         */
+
 
         // DELETE: api/commands/n
         /*

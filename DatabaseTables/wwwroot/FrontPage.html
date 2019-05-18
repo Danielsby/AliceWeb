@@ -100,10 +100,10 @@
             <button type="button" id="errors">Errors</button>
 
             <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
-            <button type="button" id="issue">Fix issue(s)</button>
+            <button type="button" id="issue">Solve</button>
 
             <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
-            <button type="button" id="reset">Reset errors</button>
+            <button type="button" id="reset">Reset</button>
 
             <!-- For information. -->
             <footer>
@@ -124,11 +124,7 @@
 
 
         /** Variables. */
-            
-        var currentData = [5, 3, 5, 2];
-        var errors = 4; // TODO: Replace with database data. 
-        var aliceAmp = [20, 25, 23, 29, 17]; // TODO: Replace with database data.
-        var aliceTemp = [4, 3, 5, 5, 8]; // TODO: Replace with database data. 
+        var aliceData = [20, 25, 23, 29, 17]; 
 
         var sectorUrl = "http://localhost:5000/api/sector";
         var logUrl = "http://localhost:5000/api/log";
@@ -190,7 +186,7 @@
                     label: "Measurements",
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: aliceAmp
+                    data: aliceData
                 }]
             },
 
@@ -213,11 +209,16 @@
             console.log(jsonResponse);
             
             // Update the values. 
-            aliceAmp = Object.values(jsonResponse["0"]);
+            aliceData = Object.values(jsonResponse["0"]);
+            aliceData.shift();
 
             // Update the chart.
-            chart.type = 'line';
-            chart.data.datasets[0].data = aliceAmp;
+            // chart.type = 'line';
+            // chart.data.datasets.type = 'radar';
+            chart.data.datasets[0].type = 'bubble';
+            chart.data.labels = ["Sector 1", "Sector 2", "Sector 3", "Sector 4",
+                "Sector 5","Sector 6", "Sector 7", "Sector 8", "Sector 9"];
+            chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Sectors";
             chart.update();
         }
@@ -228,16 +229,22 @@
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", tempUrl, false);
             xmlHttp.send(null);
-            
+
             var obj = xmlHttp.responseText;
             console.log(obj);
             var jsonResponse = JSON.parse(obj);
-            
-            // Update the values. 
-            aliceAmp = Object.values(jsonResponse["0"]);
 
+            // Update the values. 
+            aliceData = Object.values(jsonResponse["0"]);
+            aliceData.shift();
+
+            window.alert("Test");
+            
+            // Red when it go under the allowed temperature. 
             // Update the chart.
-            chart.data.datasets[0].data = aliceAmp;
+            chart.data.datasets[0].type = 'bar';
+            chart.data.labels = ["0 hour ago", "1 hours ago", "2 hours ago", "3 hours ago"];
+            chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Temperature";
 
             chart.update();
@@ -255,78 +262,79 @@
             var jsonResponse = JSON.parse(obj);
             
             // Update the values. 
-            aliceAmp = Object.values(jsonResponse["0"]);
+            aliceData = Object.values(jsonResponse["0"]);
+            aliceData.shift();
 
             // Update the chart.
-            chart.data.datasets[0].data = aliceAmp;
+            chart.data.datasets[0].data = aliceData;
+            chart.data.datasets[0].type = 'bar';
+            chart.data.labels = ["Antall errors"];
             chart.data.datasets[0].label = "Errors";
+
             chart.update();
         }
 
         /* Fix the errors. */
         document.getElementById("issue").onclick = function test() {
 
-            // Reqyuest 1: Add one more to log. 
-            var data = {"click": 1};
-            var json = JSON.stringify(data);
+            // Sector 4 is broken. Fix. 
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", logUrl, true);
-            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-            xhr.onload = function () {
-	            var users = JSON.parse(xhr.responseText);
-	            if (xhr.readyState == 4 && xhr.status == "201") {
-		            console.log(users);
-	            } else {
-		            console.log(users);
-	            }
-            }
-            xhr.send(json);
-
-            /*
-            // Request 2: Change incorrect value(s).
-            var url = "http://localhost:8080/api/v1/users";
-
-            var data = {};
-            data.firstname = "John2";
-            data.lastname  = "Snow2";
-            var json = JSON.stringify(data);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", url+'/12', true);
-            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-            xhr.onload = function () {
-	            var users = JSON.parse(xhr.responseText);
-	            if (xhr.readyState == 4 && xhr.status == "200") {
-		            console.table(users);
-	            } else {
-		            console.error(users);
-	            }
-            }
-            xhr.send(json);
-
-
+            // Change type of chart. 
+            // Show only green og red. 
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("PUT", url, false);
+            xmlHttp.open("GET", sectorUrl, false);
             xmlHttp.send(null);
-            
             var obj = xmlHttp.responseText;
             console.log(obj);
             var jsonResponse = JSON.parse(obj);
+
+            console.log(jsonResponse);
             
             // Update the values. 
-            aliceAmp = Object.values(jsonResponse["0"]);
+            var check = Object.values(jsonResponse["0"]);
 
-            // Update the chart.
-            chart.data.datasets[0].data = aliceAmp;
+            var i;
+            var sectorToChange;
+            for (i = 0; i < check.length; i++) {
+                if (check[i] == 0) {
+                    sectorToChange = i;
+                    console.log(i);
+                }       
+            }
+
+            // Update a user
+            var url = "http://localhost:5000/api/sector/";
+            var changeUrl = url + sectorToChange;
+
+            console.log("The url is: " + changeUrl);
+
+            var data = {};
+            data.id = sectorToChange;
+            var json = JSON.stringify(data);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", changeUrl, true);
+            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+
+                }
+
+                else {
+
+	            }
+            }
+
+            xhr.send(json);
+
+            
             chart.update();
-            */
         }
 
         /* Load function to check the status of the page. */
         window.onload = function test() {
-            for (i = 0; i < aliceAmp.length; i++) {
-                if (aliceAmp[i] < 15) {
+            for (i = 0; i < aliceData.length; i++) {
+                if (aliceData[i] < 15) {
                     window.confirm("One of the values are too low. Click the button.");
                 }
             }

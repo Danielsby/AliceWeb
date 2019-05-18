@@ -26,7 +26,15 @@ namespace DatabaseTables.Migrations
                 {
                     SectorNumber = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Status = table.Column<int>(nullable: false)
+                    Status1 = table.Column<bool>(nullable: false),
+                    Status2 = table.Column<bool>(nullable: false),
+                    Status3 = table.Column<bool>(nullable: false),
+                    Status4 = table.Column<bool>(nullable: false),
+                    Status5 = table.Column<bool>(nullable: false),
+                    Status6 = table.Column<bool>(nullable: false),
+                    Status7 = table.Column<bool>(nullable: false),
+                    Status8 = table.Column<bool>(nullable: false),
+                    Status9 = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
