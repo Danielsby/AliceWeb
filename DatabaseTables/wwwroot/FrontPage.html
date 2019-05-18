@@ -221,7 +221,14 @@
             chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Sectors";
             chart.update();
+
+            for (i = 0; i < aliceData.length; i++) {
+                if (aliceData[i] == 0) {
+                    window.confirm("One of the detectors are down. Click Solve button.");
+                }
+            }
         }
+        
 
         /* Show the temperature. */
         document.getElementById("temp").onclick = function test() {
@@ -237,8 +244,6 @@
             // Update the values. 
             aliceData = Object.values(jsonResponse["0"]);
             aliceData.shift();
-
-            window.alert("Test");
             
             // Red when it go under the allowed temperature. 
             // Update the chart.
@@ -248,6 +253,12 @@
             chart.data.datasets[0].label = "Temperature";
 
             chart.update();
+
+            for (i = 0; i < aliceData.length; i++) {
+                if (aliceData[i] < 20) {
+                    window.confirm("One or several temperatures are under 20 Celcius. Click Solve button.");
+                }
+            }
         }
 
         /* Show the errors. */
@@ -341,11 +352,35 @@
 
             xhr.send(json);
 
-            
+            chart.update();
+        }
+
+        /* Reset errors. */
+        document.getElementById("reset").onclick = function test() {
+
+            // Register the click. 
+            var clickUrl = "http://localhost:5000/api/reset/0";
+
+            var data = {};
+            data.id = sectorToChange;
+            var json = JSON.stringify(data);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", clickUrl, true);
+            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+
+                }
+            }
+
+            xhr.send(json);
+
             chart.update();
         }
 
         /* Load function to check the status of the page. */
+        /*
         window.onload = function test() {
             for (i = 0; i < aliceData.length; i++) {
                 if (aliceData[i] < 15) {
@@ -353,6 +388,7 @@
                 }
             }
         }
+        */
     </script>
 
     <!-- Bootstrap CSS -->
