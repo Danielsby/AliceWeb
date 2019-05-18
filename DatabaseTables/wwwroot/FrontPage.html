@@ -302,7 +302,7 @@
                 }       
             }
 
-            // Update a user
+            // Update a user.
             var url = "http://localhost:5000/api/sector/";
             var changeUrl = url + sectorToChange;
 
@@ -319,10 +319,24 @@
                 if (xhr.readyState == 4 && xhr.status == "200") {
 
                 }
+            }
 
-                else {
+            xhr.send(json);
 
-	            }
+            // Register the click. 
+            var clickUrl = "http://localhost:5000/api/log/1";
+
+            var data = {};
+            data.id = sectorToChange;
+            var json = JSON.stringify(data);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", clickUrl, true);
+            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+
+                }
             }
 
             xhr.send(json);

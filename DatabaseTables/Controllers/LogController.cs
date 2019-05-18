@@ -20,14 +20,18 @@ namespace DatabaseTables.Controllers
         {
             return _context.Clicks;
         }
- 
-        [HttpPost]
-        public ActionResult<Log> PostData(Log command)
-        {
-            _context.Clicks.Add(command); // Adding to the database.
-            _context.SaveChanges(); // When you save something to the database. 
 
-            return CreatedAtAction("PostData", new Log { Clicks = command.Clicks }, command);
+        // PUT: api/commands/n
+        [HttpPut("{id}")]
+        public ActionResult<Log> PostData(int id, Sector command)
+        {
+            var row = _context.Clicks.Find(1);
+
+            row.Clicks += id;
+
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }

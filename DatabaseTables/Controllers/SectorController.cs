@@ -88,17 +88,20 @@ namespace DatabaseTables.Controllers
             return NoContent();
         }
         
-        // POST: api/commands
         /*
+        // POST: api/commands
          [HttpPost]
-         public ActionResult<Data> PostData(Data command)
+         public ActionResult<Sector> PostData(Sector command)
          {
-             _context.VoltValues.Add(command); // Adding to the database.
-             _context.SaveChanges(); // When you save something to the database. 
+            var row = _context.Status.Find(1);
+            var row = _context.Status.Find(1);
 
-             return CreatedAtAction("PostData", new Command { Id = command.Id }, command);
+
+            _context.SaveChanges(); // When you save something to the database. 
+
+             // return CreatedAtAction("PostData", new Command { Id = command.Id }, command);
          }
-         */
+         /*
 
 
         // DELETE: api/commands/n
