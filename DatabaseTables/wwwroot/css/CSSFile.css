@@ -1,6 +1,6 @@
 ﻿body {
     background-color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .item1 {grid-area: header;}
@@ -154,5 +154,4 @@
 .show {
     display: block;
 }
-
 

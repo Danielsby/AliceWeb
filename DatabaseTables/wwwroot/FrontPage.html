@@ -22,6 +22,7 @@
 
     <div class="grid-container">
         <div class="item1">
+            <div>The top panel from the UX prototype comes here. </div>
             <!--Dette er horisontal meny, ikke vertical. Jeg har skrevet feil, rydder i dette senere-->
             <div class="verticalmenu">
                 <nav>
@@ -45,7 +46,18 @@
 
                         <li style="float: right">
                             <div class="dropdown">
-                                <button onclick="myFunction2()" class="dropbtn"><i class='fas fa-cog'></i> Settings <i class='fas fa-angle-down'></i></button>
+                                <button onclick="myFunction3()" class="dropbtn"><i class='fas fa-cog'></i> Help <i class='fas fa-angle-down'></i></button>
+                                <div id="Settings" class="dropdown-content">
+                                    <a href="./default.html">Set</a>
+                                    <a href="./default.html">tin</a>
+                                    <a href="./default.html">gs</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li style="float: right">
+                            <div class="dropdown">
+                                <button onclick="myFunction2()" class="dropbtn"><i class='fas fa-cog'></i> Tools <i class='fas fa-angle-down'></i></button>
                                 <div id="Settings" class="dropdown-content">
                                     <a href="./default.html">Set</a>
                                     <a href="./default.html">tin</a>
@@ -57,6 +69,23 @@
                         <!-- <li style="float:right"><a href="./default.html">Settings</a></li>  -->
                     </ul>
                 </nav>
+
+                <div id="chartFunctions">
+                    <nav>
+                        <!-- Display the sectors. -->
+                        <button type="button" id="default">SPD, Silicon Pixel Detector</button>
+
+                        <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
+                        <button type="button" id="issue">Solve</button>
+
+                        <!-- Send a GET request and show on graph from Log. -->
+                        <button type="button" id="errors">Errors</button>
+
+                        <!-- Display the temperatures. -->
+                        <button type="button" id="temp">Temperatures</button>
+                    </nav>
+                </div>
+
             </div>
         </div>
 
@@ -84,28 +113,21 @@
         </div>
 
         <div class="item3">
-            <!--
-        Display relevant data to the user.
-        Default: from the alice-detector.
-    -->
             <canvas id="myChart"></canvas>
 
-            <!-- Display the sectors. -->
-            <button type="button" id="default">Pixel Detector</button>
 
-            <!-- Display the temperatures. -->
-            <button type="button" id="temp">Temperature</button>
+            <!-- Display the sectors. 
+            <button type="button" id="default">SPD, Silicon Pixel Detector</button>
 
-            <!-- Send a GET request and show on graph from Log. -->
-            <button type="button" id="errors">Errors</button>
 
-            <!-- Send a PUT request to the wrong data and change to an acceptable number. -->
             <button type="button" id="issue">Solve</button>
 
-            <!-- For information. -->
-            <footer>
-                <p>Copyright (c) 2019 Bachelor thesis </p>
-            </footer>
+
+            <button type="button" id="temp">Temperatures</button>
+
+
+            <button type="button" id="errors">Errors</button
+            -->
         </div>
 
         <!-- Show something in these(?).  -->
@@ -221,7 +243,7 @@
 
             for (i = 0; i < aliceData.length; i++) {
                 if (aliceData[i] == 0) {
-                    window.confirm("One of the detectors are down. Click Solve button.");
+                    window.confirm("Warning! Something is wrong! One of the sectors are down. Click the solve button to solve the problem.");
                 }
             }
         }
@@ -253,7 +275,7 @@
 
             for (i = 0; i < aliceData.length; i++) {
                 if (aliceData[i] < 20) {
-                    window.confirm("One or several temperatures are under 20 Celcius. Click Solve button.");
+                    window.confirm("Warning! Something is wrong! One or several temperatures are under 20 Celcius.");
                 }
             }
         }
