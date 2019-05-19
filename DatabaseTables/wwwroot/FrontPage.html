@@ -143,7 +143,7 @@
 
 
         /** Variables. */
-        var aliceData = [20, 25, 23, 29, 17]; 
+        var aliceData = [0, 0, 0, 0, 0]; 
 
         var sectorUrl = "http://localhost:5000/api/sector";
         var logUrl = "http://localhost:5000/api/log";
@@ -204,7 +204,8 @@
                 datasets: [{
                     label: "Measurements",
                     backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    // borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: ["green", "green", "green", "green", "green", "green"], 
                     data: aliceData
                 }]
             },
@@ -226,10 +227,18 @@
             var jsonResponse = JSON.parse(obj);
 
             console.log(jsonResponse);
-            
+
             // Update the values. 
             aliceData = Object.values(jsonResponse["0"]);
             aliceData.shift();
+                
+            var barColors = ["green", "green", "green", "green", "green", "green", "green", "green", "green"];
+            for (i = 0; i < aliceData.length; i++) {
+                if (aliceData[i] == 0) {
+                    barColors[i] = "red";
+                    window.confirm("Warning! Something is wrong! One of the sectors are down. Click the solve button to solve the problem.");
+                }
+            }
 
             // Update the chart.
             // chart.type = 'line';
@@ -239,16 +248,11 @@
                 "Sector 5","Sector 6", "Sector 7", "Sector 8", "Sector 9"];
             chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Sectors";
+            chart.data.datasets[0].backgroundColor = barColors;
             chart.update();
 
-            for (i = 0; i < aliceData.length; i++) {
-                if (aliceData[i] == 0) {
-                    window.confirm("Warning! Something is wrong! One of the sectors are down. Click the solve button to solve the problem.");
-                }
-            }
         }
         
-
         /* Show the temperature. */
         document.getElementById("temp").onclick = function test() {
 
@@ -263,6 +267,14 @@
             // Update the values. 
             aliceData = Object.values(jsonResponse["0"]);
             aliceData.shift();
+
+            var barColors = ["green", "green", "green", "green"];
+            for (i = 0; i < aliceData.length; i++) {
+                if (aliceData[i] < 20) {
+                    window.confirm("Warning! Something is wrong! One or several temperatures are under 20 Celcius.");
+                    barColors[i] = "red";
+                }
+            }
             
             // Red when it go under the allowed temperature. 
             // Update the chart.
@@ -270,14 +282,9 @@
             chart.data.labels = ["0 hour ago", "1 hours ago", "2 hours ago", "3 hours ago"];
             chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Temperature";
+            chart.data.datasets[0].backgroundColor = barColors;
 
             chart.update();
-
-            for (i = 0; i < aliceData.length; i++) {
-                if (aliceData[i] < 20) {
-                    window.confirm("Warning! Something is wrong! One or several temperatures are under 20 Celcius.");
-                }
-            }
         }
 
         /* Show the errors. */
@@ -300,6 +307,7 @@
             chart.data.datasets[0].type = 'bar';
             chart.data.labels = ["Antall errors"];
             chart.data.datasets[0].label = "Errors";
+            chart.data.datasets[0].backgroundColor = "#f9d71c";
 
             chart.update();
         }
