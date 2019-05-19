@@ -7,7 +7,6 @@ namespace DatabaseTables.Helpers
 {
     /// <summary>
     /// Accessing application settings via objects. 
-    /// For example: The Users Controller accesses app settings via an IOptions<Appsettings> 
     /// </summary>
     public class AppSettings
     {

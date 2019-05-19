@@ -7,7 +7,7 @@ namespace DatabaseTables.Dtos
 {
     /// <summary>
     /// Data transfer object. 
-    /// Without passwordHash and passwordSalt. 
+    /// No hash or salt included in this. 
     /// </summary>
     public class UserDto
     {

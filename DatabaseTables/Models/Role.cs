@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// Role options for users. 
+    /// </summary>
     public static class Role
     {
         public const string Admin = "Admin";

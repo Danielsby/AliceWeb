@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// Represent the sectors in the silicon detector. 
+    /// </summary>
     public class Sector
     {
         [Key]

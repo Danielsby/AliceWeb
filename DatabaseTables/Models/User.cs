@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// Basic user data for login. 
+    /// </summary>
     public class User
     {
         [Key]

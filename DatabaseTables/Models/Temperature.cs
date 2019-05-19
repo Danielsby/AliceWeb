@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using DatabaseTables.Models;
 namespace DatabaseTables.Models
 {
+    /// <summary>
+    /// Represent the temperature by the detector.
+    /// </summary>
     public class Temperature
     {
         [Key]
