@@ -12,20 +12,14 @@ using Microsoft.IdentityModel.Logging;
 
 namespace DatabaseTables.Services
 {
-    public interface IUserService
-    {
-        User AuthenticateUser(string username, string password);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-    }
-
-    public class UserService : IUserService
+    public class UserService
     {
         // Should be in the database later. 
+        // Hardcoded for simplicity. 
         private List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
-            new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User }
+            new User { Id = 1, FirstName = "Håkon", LastName = "Olsen", Username = "aliceadmin", Password = "aliceadmin2019", Role = Role.Admin },
+            new User { Id = 2, FirstName = "Marius", LastName = "Knutsen", Username = "aliceuser", Password = "aliceuser2019", Role = Role.User }
         };
 
         private readonly AppSettings _appSettings;
@@ -35,16 +29,16 @@ namespace DatabaseTables.Services
             _appSettings = appSettings.Value;
         }
 
-        // Method for checking authentication. 
+        // To allow operators log-in to the interface as either admin or user.  
         public User AuthenticateUser(string username, string password)
         {
             var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
-            // User does not exist. 
+            // User does not exist. Return nothing. 
             if (user == null)
                 return null;
 
-            // Authentication is successful, so generate jwt token
+            // Generate JWT token.
             var tokenCreater = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -62,19 +56,13 @@ namespace DatabaseTables.Services
             var token = tokenCreater.CreateToken(tokenDescriptor);
             user.Token = tokenCreater.WriteToken(token);
 
-            // remove password before returning
+            // Remove the password before returning. 
             user.Password = null;
 
             return user;
         }
 
-
-
-
-
-
-        // Remove(?) 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetAllUsers()
         {
             // return users without passwords
             return _users.Select(x => {
@@ -83,7 +71,7 @@ namespace DatabaseTables.Services
             });
         }
 
-        public User GetById(int id)
+        public User GetUserById(int id)
         {
             var user = _users.FirstOrDefault(x => x.Id == id);
 

@@ -16,9 +16,9 @@ namespace DatabaseTables.Controllers
         // private readonly CommandContext _context;
         // public UsersController(CommandContext context) => _context = context;
 
-        private IUserService _userService;
+        private UserService _userService;
 
-        public UsersController(IUserService userService)
+        public UsersController(UserService userService)
         {
             _userService = userService;
         }
@@ -44,7 +44,7 @@ namespace DatabaseTables.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAllUsers();
             return Ok(users);
         }
 
@@ -52,7 +52,7 @@ namespace DatabaseTables.Controllers
         [HttpGet("{id}")]
         public IActionResult GetIdUser(int id)
         {
-            var user = _userService.GetById(id);
+            var user = _userService.GetUserById(id);
             
             if (user == null)
             {

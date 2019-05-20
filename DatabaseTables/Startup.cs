@@ -92,7 +92,7 @@ namespace DatabaseTables
                 };
             });
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<UserService, UserService>();
         }
 
         /// <summary>
