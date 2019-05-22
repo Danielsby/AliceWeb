@@ -10,7 +10,7 @@ namespace DatabaseTables.Models
     /// </summary>
     public static class Role
     {
-        public const string Admin = "Admin";
-        public const string User = "User";
+        public const string Expert = "Admin";
+        public const string Operator = "User";
     }
 }

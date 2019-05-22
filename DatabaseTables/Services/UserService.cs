@@ -18,8 +18,8 @@ namespace DatabaseTables.Services
         // Hardcoded for simplicity. 
         private List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Håkon", LastName = "Olsen", Username = "aliceadmin", Password = "aliceadmin2019", Role = Role.Admin },
-            new User { Id = 2, FirstName = "Marius", LastName = "Knutsen", Username = "aliceuser", Password = "aliceuser2019", Role = Role.User }
+            new User { Id = 1, FirstName = "Håkon", LastName = "Olsen", Username = "AliceExpert", Password = "AliceExpert2019", Role = Role.Expert },
+            new User { Id = 2, FirstName = "Marius", LastName = "Knutsen", Username = "AliceOperator", Password = "AliceOperator2019", Role = Role.Operator }
         };
 
         private readonly AppSettings _appSettings;

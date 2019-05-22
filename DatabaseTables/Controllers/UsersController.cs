@@ -39,7 +39,7 @@ namespace DatabaseTables.Controllers
             return Ok(user);
         }
 
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.Expert)]
         [EnableCors]
         [HttpGet]
         public IActionResult GetAll()
@@ -61,7 +61,7 @@ namespace DatabaseTables.Controllers
 
             // Only allow admins to access other user recoreds.
             var currentUserId = int.Parse(User.Identity.Name);
-            if (id != currentUserId && !User.IsInRole(Role.Admin))
+            if (id != currentUserId && !User.IsInRole(Role.Expert))
             {
                 return Forbid();
             }
