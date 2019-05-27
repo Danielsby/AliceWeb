@@ -209,9 +209,15 @@
                     data: aliceData
                 }]
             },
-
-            // Configuration options go here
-            options: {}
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+             }
         }); // End of create a chart.
 
         /* Show the sectors. */
@@ -266,9 +272,13 @@
 
             // Update the values. 
             aliceData = Object.values(jsonResponse["0"]);
+
             aliceData.shift();
 
+            console.log("test1 " + aliceData);
+
             var barColors = ["green", "green", "green", "green"];
+
             for (i = 0; i < aliceData.length; i++) {
                 if (aliceData[i] < 20) {
                     window.confirm("Warning! Something is wrong! One or several temperatures are under 20 Celcius.");
@@ -276,10 +286,12 @@
                 }
             }
             
+            console.log("test2 " + aliceData);
+            
             // Red when it go under the allowed temperature. 
             // Update the chart.
             chart.data.datasets[0].type = 'bar';
-            chart.data.labels = ["0 hour ago", "1 hours ago", "2 hours ago", "3 hours ago"];
+            chart.data.labels = ["Now", "1 hours ago", "2 hours ago", "3 hours ago"];
             chart.data.datasets[0].data = aliceData;
             chart.data.datasets[0].label = "Temperature";
             chart.data.datasets[0].backgroundColor = barColors;

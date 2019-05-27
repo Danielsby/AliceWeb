@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DatabaseTables.Migrations
 {
-    public partial class Tables : Migration
+    public partial class CreateTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
